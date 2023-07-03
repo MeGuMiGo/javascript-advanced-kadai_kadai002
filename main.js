@@ -10,8 +10,6 @@ const typedfield = document.getElementById('typed');
 const wrap = document.getElementById('wrap');
 const start = document.getElementById('start');
 const count = document.getElementById('count');
-// 課題 >> 現在のタイプ数を表示する要素
-const countStr = document.getElementById('output');
 
 // 複数のテキストを格納する配列
 const textLists = [
@@ -66,8 +64,6 @@ const keyPress = e => {
   typedfield.textContent = typed;
   untypedfield.textContent = untyped;
 
-  // 課題 >> 現在のタイプ数を表示する
-  countStr.textContent = score
 
   // テキストがなくなったら新しいテキストを表示
 if(untyped === '') {
@@ -98,17 +94,18 @@ const rankCheck = score => {
 
 // ゲームを終了
 const gameOver = id => {
-  // clearInterval(id);
-
-  setTimeout (id, 0);
+  clearInterval(id);
   untypedfield.textContent = 'タイムアップ！'
+  
+  setTimeout(() => {
+    const result = confirm(rankCheck(score));
 
-  const result = confirm(rankCheck(score));
+    // OKボタンをクリックされたらリロードする
+     if(result == true) {
+       window.location.reload();
+     }    
+   }, 100);
 
-   // OKボタンをクリックされたらリロードする
-   if(result == true) {
-     window.location.reload();
-   }
 };
 
 
@@ -127,6 +124,7 @@ const timer = () => {
   // カウントが0になったらタイマーを停止する
     if(time <= 0) {
       gameOver(id);
+      
     }
   }, 1000);
 };
