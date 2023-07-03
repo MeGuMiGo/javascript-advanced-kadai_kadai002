@@ -5,7 +5,7 @@ body {
 }
 
  /* ゲームの残り秒数が表示されるタイマーの領域 */
- .count, .output {
+ .count, {
   margin: 0;
   font-weight: bold;
   color: #888;
